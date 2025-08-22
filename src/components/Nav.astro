@@ -1,0 +1,51 @@
+<nav class="flex items-center justify-between bg-gray-800 text-white px-4 py-3 relative">
+  <div class="text-xl font-bold">Mi Logo</div>
+
+  <!-- Botón hamburguesa -->
+  <button id="menu-btn" class="text-3xl md:hidden focus:outline-none transition-transform duration-300">
+    ☰
+  </button>
+
+  <!-- Menú -->
+  <ul
+    id="menu"
+    class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out flex-col gap-4 absolute top-16 left-0 w-full bg-gray-800 md:static md:flex md:max-h-none md:flex-row md:gap-6"
+  >
+    <li><a href="#" class="block px-4 py-2 hover:text-gray-400">Inicio</a></li>
+    <li><a href="#" class="block px-4 py-2 hover:text-gray-400">Servicios</a></li>
+    <li><a href="#" class="block px-4 py-2 hover:text-gray-400">Proyectos</a></li>
+    <li><a href="#" class="block px-4 py-2 hover:text-gray-400">Contacto</a></li>
+  </ul>
+</nav>
+
+const menuBtn = document.getElementById("menu-btn") as HTMLButtonElement | null;
+const menu = document.getElementById("menu") as HTMLUListElement | null;
+
+if (menuBtn && menu) {
+  menuBtn.addEventListener("click", () => {
+    const isOpen = menu.style.maxHeight && menu.style.maxHeight !== "0px";
+
+    if (isOpen) {
+      // Cerrar
+      menu.style.maxHeight = "0px";
+      menuBtn.style.transform = "rotate(0deg)";
+      menuBtn.textContent = "☰";
+    } else {
+      // Abrir
+      menu.style.maxHeight = menu.scrollHeight + "px";
+      menuBtn.style.transform = "rotate(90deg)";
+      menuBtn.textContent = "✖";
+    }
+  });
+
+  // Cerrar menú al hacer clic en un enlace
+  const links = menu.querySelectorAll("a");
+  links.forEach((link) => {
+    link.addEventListener("click", () => {
+      menu.style.maxHeight = "0px";
+      menuBtn.style.transform = "rotate(0deg)";
+      menuBtn.textContent = "☰";
+    });
+  });
+}
+
